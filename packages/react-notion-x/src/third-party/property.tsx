@@ -8,7 +8,7 @@ import { FormulaResult } from 'notion-types'
 import { Checkbox } from '../components/checkbox'
 import { GracefulImage } from '../components/graceful-image'
 import { PageTitle } from '../components/page-title'
-import { Text } from '../components/text'
+import { DateProperty, Text } from '../components/text'
 import { useNotionContext } from '../context'
 import { cs } from '../utils'
 import { evalFormula } from './eval-formula'
@@ -59,13 +59,7 @@ export const PropertyImpl: React.FC<IPropertyProps> = (props) => {
     [block, data]
   )
 
-  const renderDateValue = React.useMemo(
-    () =>
-      function DateProperty() {
-        return <Text value={data} block={block} />
-      },
-    [block, data]
-  )
+  const renderDateValue = React.useMemo(() => () => DateProperty(data), [data])
 
   const renderRelationValue = React.useMemo(
     () =>
